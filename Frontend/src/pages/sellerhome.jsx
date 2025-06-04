@@ -8,6 +8,7 @@ import BookIcon from '@mui/icons-material/Book';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BarChartIcon from '@mui/icons-material/BarChart';
+<<<<<<< HEAD
 
 // Example: Recent activity data (dummy)
 const recentActivities = [
@@ -18,6 +19,18 @@ const recentActivities = [
 
 function SellerHome() {
   // Dummy stats for illustration
+=======
+import Avatar from '@mui/material/Avatar';
+import './sellerhome.css';
+
+const recentActivities = [
+  { action: 'Sold "React for Beginners"', time: '2 hours ago', type: 'sale' },
+  { action: 'Added new eBook "Node.js Mastery"', time: 'Yesterday', type: 'add' },
+  { action: 'Updated price for "Python Essentials"', time: '2 days ago', type: 'update' },
+];
+
+function SellerHome() {
+>>>>>>> 09b2941 (Books updated)
   const stats = [
     { label: 'Total eBooks', value: 24, icon: <BookIcon color="primary" fontSize="large" /> },
     { label: 'Total Sales', value: 120, icon: <MonetizationOnIcon color="success" fontSize="large" /> },
@@ -25,6 +38,7 @@ function SellerHome() {
   ];
 
   return (
+<<<<<<< HEAD
     <Box
       sx={{
         minHeight: '100vh',
@@ -71,12 +85,29 @@ function SellerHome() {
             bgcolor: '#0ea5e9',
             '&:hover': { bgcolor: '#0369a1' },
           }}
+=======
+    <Box className="sellerhome-root">
+      {/* Header */}
+      <Box className="sellerhome-header">
+        <Box className="sellerhome-profile">
+          <Avatar
+            src="https://randomuser.me/api/portraits/men/32.jpg"
+            className="sellerhome-avatar"
+          />
+          <span className="sellerhome-greeting">Welcome back, Seller!</span>
+        </Box>
+        <Button
+          variant="contained"
+          startIcon={<AddCircleOutlineIcon />}
+          className="sellerhome-add-btn"
+>>>>>>> 09b2941 (Books updated)
         >
           Add New Collection
         </Button>
       </Box>
 
       {/* Stats Cards */}
+<<<<<<< HEAD
       <Grid
         container
         spacing={4}
@@ -116,6 +147,17 @@ function SellerHome() {
                   fontFamily: 'Montserrat, sans-serif',
                 }}
               >
+=======
+      <Grid container spacing={4} justifyContent="center" className="sellerhome-stats-grid">
+        {stats.map((stat) => (
+          <Grid item xs={12} sm={4} key={stat.label}>
+            <Paper elevation={0} className="sellerhome-stats-card">
+              <Box sx={{ mb: 1 }}>{stat.icon}</Box>
+              <Typography variant="h4" fontWeight={800} sx={{ color: '#0ea5e9' }}>
+                {stat.value}
+              </Typography>
+              <Typography color="text.secondary" sx={{ fontWeight: 600, fontSize: 18, letterSpacing: 1 }}>
+>>>>>>> 09b2941 (Books updated)
                 {stat.label}
               </Typography>
             </Paper>
@@ -124,6 +166,7 @@ function SellerHome() {
       </Grid>
 
       {/* Main Actions */}
+<<<<<<< HEAD
       <Box
         sx={{
           display: 'flex',
@@ -147,11 +190,19 @@ function SellerHome() {
             color: '#0ea5e9',
             '&:hover': { bgcolor: '#e0f2fe', borderColor: '#0369a1', color: '#0369a1' },
           }}
+=======
+      <Box className="sellerhome-actions">
+        <Button
+          variant="outlined"
+          startIcon={<BookIcon />}
+          className="sellerhome-action-btn"
+>>>>>>> 09b2941 (Books updated)
         >
           Manage eBooks
         </Button>
         <Button
           variant="outlined"
+<<<<<<< HEAD
           color="secondary"
           size="large"
           startIcon={<MonetizationOnIcon />}
@@ -164,12 +215,17 @@ function SellerHome() {
             color: '#f59e42',
             '&:hover': { bgcolor: '#fff7ed', borderColor: '#ea580c', color: '#ea580c' },
           }}
+=======
+          startIcon={<MonetizationOnIcon />}
+          className="sellerhome-action-btn secondary"
+>>>>>>> 09b2941 (Books updated)
         >
           View Sales
         </Button>
       </Box>
 
       {/* Recent Activity */}
+<<<<<<< HEAD
       <Paper
         elevation={0}
         sx={{
@@ -194,12 +250,17 @@ function SellerHome() {
         >
           Recent Activity
         </Typography>
+=======
+      <Box className="sellerhome-activity-list">
+        <div className="sellerhome-activity-title">Recent Activity</div>
+>>>>>>> 09b2941 (Books updated)
         {recentActivities.length === 0 ? (
           <Typography color="text.secondary" sx={{ fontStyle: 'italic' }}>
             No recent activity.
           </Typography>
         ) : (
           recentActivities.map((activity, idx) => (
+<<<<<<< HEAD
             <Box
               key={idx}
               sx={{
@@ -219,6 +280,20 @@ function SellerHome() {
         )}
       </Paper>
 
+=======
+            <div className="sellerhome-activity-row" key={idx}>
+              <span>
+                <span className={`sellerhome-activity-dot ${activity.type}`}></span>
+                {activity.action}
+              </span>
+              <Typography variant="caption" color="text.secondary">
+                {activity.time}
+              </Typography>
+            </div>
+          ))
+        )}
+      </Box>
+>>>>>>> 09b2941 (Books updated)
     </Box>
   );
 }
