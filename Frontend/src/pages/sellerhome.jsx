@@ -8,19 +8,32 @@ import BookIcon from '@mui/icons-material/Book';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BarChartIcon from '@mui/icons-material/BarChart';
-<<<<<<< HEAD
-
-// Example: Recent activity data (dummy)
-const recentActivities = [
-  { action: 'Sold "React for Beginners"', time: '2 hours ago' },
-  { action: 'Added new eBook "Node.js Mastery"', time: 'Yesterday' },
-  { action: 'Updated price for "Python Essentials"', time: '2 days ago' },
-];
-
-function SellerHome() {
-  // Dummy stats for illustration
-=======
 import Avatar from '@mui/material/Avatar';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import Slide from '@mui/material/Slide';
+import Fab from '@mui/material/Fab';
+import Tooltip from '@mui/material/Tooltip';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import Timeline from '@mui/lab/Timeline';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+import Grow from '@mui/material/Grow';
 import './sellerhome.css';
 
 const recentActivities = [
@@ -30,270 +43,265 @@ const recentActivities = [
 ];
 
 function SellerHome() {
->>>>>>> 09b2941 (Books updated)
   const stats = [
     { label: 'Total eBooks', value: 24, icon: <BookIcon color="primary" fontSize="large" /> },
     { label: 'Total Sales', value: 120, icon: <MonetizationOnIcon color="success" fontSize="large" /> },
     { label: 'Earnings', value: '$1,250', icon: <BarChartIcon color="warning" fontSize="large" /> },
   ];
 
+  // Add New Book Modal State
+  const [open, setOpen] = React.useState(false);
+  const [newBook, setNewBook] = React.useState({
+    title: '',
+    author: '',
+    price: '',
+    description: '',
+    cover: '',
+  });
+  const [books, setBooks] = React.useState([]);
+  const [coverPreview, setCoverPreview] = React.useState('');
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    setCoverPreview('');
+  };
+  const handleChange = (e) => {
+    setNewBook({ ...newBook, [e.target.name]: e.target.value });
+    if (e.target.name === 'cover') {
+      setCoverPreview(e.target.value);
+    }
+  };
+  const handleAddBook = (e) => {
+    e.preventDefault();
+    setBooks([...books, newBook]);
+    setNewBook({ title: '', author: '', price: '', description: '', cover: '' });
+    setCoverPreview('');
+    handleClose();
+  };
+
+  // Modern color palette
+  const accentGradient = 'linear-gradient(90deg, #7c3aed 0%, #0ea5e9 100%)';
+  const glassBg = 'rgba(255,255,255,0.7)';
+  const glassBorder = '1.5px solid #e0e7ff';
+
   return (
-<<<<<<< HEAD
-    <Box
-      sx={{
-        minHeight: '100vh',
-        bgcolor: 'linear-gradient(120deg, #e0e7ff 0%, #f0fdfa 100%)',
-        p: { xs: 2, sm: 4 },
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      {/* Header */}
-      <Box
-        sx={{
-          width: '100%',
-          maxWidth: 1100,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          mb: 4,
-          mt: 2,
-        }}
-      >
-        <Typography
-          variant="h4"
-          fontWeight={800}
-          sx={{
-            color: '#0ea5e9',
-            letterSpacing: 2,
-            fontFamily: 'Montserrat, sans-serif',
-          }}
-        >
-          EBook Seller Dashboard
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddCircleOutlineIcon />}
-          sx={{
-            borderRadius: 3,
-            px: 4,
-            fontWeight: 700,
-            boxShadow: 1,
-            fontSize: 18,
-            bgcolor: '#0ea5e9',
-            '&:hover': { bgcolor: '#0369a1' },
-          }}
-=======
     <Box className="sellerhome-root">
       {/* Header */}
-      <Box className="sellerhome-header">
+      <Box className="sellerhome-header-glass">
         <Box className="sellerhome-profile">
           <Avatar
             src="https://randomuser.me/api/portraits/men/32.jpg"
-            className="sellerhome-avatar"
+            className="sellerhome-avatar-glass"
           />
-          <span className="sellerhome-greeting">Welcome back, Seller!</span>
+          <Box>
+            <Typography variant="h4" className="sellerhome-greeting-glass">
+              Welcome back, Seller!
+            </Typography>
+            <Typography variant="subtitle1" className="sellerhome-subgreeting-glass">
+              Manage your eBooks and sales with ease.
+            </Typography>
+          </Box>
         </Box>
-        <Button
-          variant="contained"
-          startIcon={<AddCircleOutlineIcon />}
-          className="sellerhome-add-btn"
->>>>>>> 09b2941 (Books updated)
-        >
-          Add New Collection
-        </Button>
       </Box>
 
       {/* Stats Cards */}
-<<<<<<< HEAD
-      <Grid
-        container
-        spacing={4}
-        justifyContent="center"
-        sx={{ width: '100%', maxWidth: 1100, mb: 4 }}
-      >
-        {stats.map((stat) => (
+      <Grid container spacing={4} justifyContent="center" className="sellerhome-stats-grid-glass">
+        {stats.map((stat, i) => (
           <Grid item xs={12} sm={4} key={stat.label}>
-            <Paper
-              elevation={0}
-              sx={{
-                p: 4,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                bgcolor: '#fff',
-                borderRadius: 4,
-                border: '1.5px solid #e0e7ff',
-                minHeight: 180,
-                gap: 1,
-              }}
-            >
-              <Box sx={{ mb: 1 }}>{stat.icon}</Box>
-              <Typography
-                variant="h4"
-                fontWeight={800}
-                sx={{ color: '#0ea5e9', fontFamily: 'Montserrat, sans-serif' }}
-              >
+            <Card className="sellerhome-stats-card-glass">
+              <Box className="sellerhome-stats-icon-glass">{stat.icon}</Box>
+              <Typography variant="h3" className="sellerhome-stats-value-glass">
                 {stat.value}
               </Typography>
-              <Typography
-                color="text.secondary"
-                sx={{
-                  fontWeight: 600,
-                  fontSize: 18,
-                  letterSpacing: 1,
-                  fontFamily: 'Montserrat, sans-serif',
-                }}
-              >
-=======
-      <Grid container spacing={4} justifyContent="center" className="sellerhome-stats-grid">
-        {stats.map((stat) => (
-          <Grid item xs={12} sm={4} key={stat.label}>
-            <Paper elevation={0} className="sellerhome-stats-card">
-              <Box sx={{ mb: 1 }}>{stat.icon}</Box>
-              <Typography variant="h4" fontWeight={800} sx={{ color: '#0ea5e9' }}>
-                {stat.value}
-              </Typography>
-              <Typography color="text.secondary" sx={{ fontWeight: 600, fontSize: 18, letterSpacing: 1 }}>
->>>>>>> 09b2941 (Books updated)
+              <Typography className="sellerhome-stats-label-glass">
                 {stat.label}
               </Typography>
-            </Paper>
+            </Card>
           </Grid>
         ))}
       </Grid>
 
       {/* Main Actions */}
-<<<<<<< HEAD
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 3,
-          mb: 5,
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-        }}
-      >
-        <Button
-          variant="outlined"
-          color="primary"
-          size="large"
-          startIcon={<BookIcon />}
-          sx={{
-            borderRadius: 3,
-            px: 4,
-            fontWeight: 700,
-            fontSize: 17,
-            borderColor: '#0ea5e9',
-            color: '#0ea5e9',
-            '&:hover': { bgcolor: '#e0f2fe', borderColor: '#0369a1', color: '#0369a1' },
-          }}
-=======
-      <Box className="sellerhome-actions">
+      <Box className="sellerhome-actions-glass">
         <Button
           variant="outlined"
           startIcon={<BookIcon />}
-          className="sellerhome-action-btn"
->>>>>>> 09b2941 (Books updated)
+          className="sellerhome-action-btn-glass"
         >
           Manage eBooks
         </Button>
         <Button
           variant="outlined"
-<<<<<<< HEAD
-          color="secondary"
-          size="large"
           startIcon={<MonetizationOnIcon />}
-          sx={{
-            borderRadius: 3,
-            px: 4,
-            fontWeight: 700,
-            fontSize: 17,
-            borderColor: '#f59e42',
-            color: '#f59e42',
-            '&:hover': { bgcolor: '#fff7ed', borderColor: '#ea580c', color: '#ea580c' },
-          }}
-=======
-          startIcon={<MonetizationOnIcon />}
-          className="sellerhome-action-btn secondary"
->>>>>>> 09b2941 (Books updated)
+          className="sellerhome-action-btn-glass secondary"
         >
           View Sales
         </Button>
       </Box>
 
-      {/* Recent Activity */}
-<<<<<<< HEAD
-      <Paper
-        elevation={0}
-        sx={{
-          width: '100%',
-          maxWidth: 600,
-          p: { xs: 2, sm: 4 },
-          mb: 4,
-          bgcolor: '#f8fafc',
-          borderRadius: 4,
-          border: '1.5px solid #e0e7ff',
-        }}
-      >
-        <Typography
-          variant="h6"
-          fontWeight={700}
-          sx={{
-            mb: 2,
-            color: '#0ea5e9',
-            fontFamily: 'Montserrat, sans-serif',
-            letterSpacing: 1,
-          }}
+      {/* Floating Action Button for Add Book */}
+      <Tooltip title="Add New Book" placement="left">
+        <Fab
+          color="primary"
+          onClick={handleOpen}
+          className="sellerhome-fab"
         >
+          <AddCircleOutlineIcon fontSize="large" />
+        </Fab>
+      </Tooltip>
+
+      {/* Add New Book Modal */}
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth TransitionComponent={Slide} keepMounted>
+        <DialogTitle className="sellerhome-modal-title">
+          Add New Book
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            className="sellerhome-modal-close"
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <form onSubmit={handleAddBook}>
+          <DialogContent dividers className="sellerhome-modal-content">
+            <TextField
+              label="Title"
+              name="title"
+              value={newBook.title}
+              onChange={handleChange}
+              required
+              fullWidth
+              variant="outlined"
+              className="sellerhome-modal-input"
+            />
+            <TextField
+              label="Author"
+              name="author"
+              value={newBook.author}
+              onChange={handleChange}
+              required
+              fullWidth
+              variant="outlined"
+              className="sellerhome-modal-input"
+            />
+            <TextField
+              label="Price"
+              name="price"
+              value={newBook.price}
+              onChange={handleChange}
+              required
+              fullWidth
+              type="number"
+              inputProps={{ min: 0 }}
+              variant="outlined"
+              className="sellerhome-modal-input"
+            />
+            <TextField
+              label="Description"
+              name="description"
+              value={newBook.description}
+              onChange={handleChange}
+              multiline
+              rows={3}
+              fullWidth
+              variant="outlined"
+              className="sellerhome-modal-input"
+            />
+            <TextField
+              label="Cover Image URL"
+              name="cover"
+              value={newBook.cover}
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
+              className="sellerhome-modal-input"
+            />
+            {coverPreview && (
+              <Box className="sellerhome-modal-cover-preview">
+                <CardMedia
+                  component="img"
+                  image={coverPreview}
+                  alt="Book Cover Preview"
+                  className="sellerhome-modal-cover-img"
+                />
+              </Box>
+            )}
+          </DialogContent>
+          <DialogActions className="sellerhome-modal-actions">
+            <Button onClick={handleClose} className="sellerhome-modal-cancel">Cancel</Button>
+            <Button type="submit" variant="contained" className="sellerhome-modal-submit">Add Book</Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+
+      {/* Books Grid */}
+      {books.length > 0 && (
+        <Box className="sellerhome-books-section">
+          <Typography variant="h5" className="sellerhome-books-title">
+            Your Books
+          </Typography>
+          <Grid container spacing={4}>
+            {books.map((book, idx) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
+                <Card className="sellerhome-book-card">
+                  <CardMedia
+                    component="img"
+                    image={book.cover || 'https://via.placeholder.com/120x160?text=No+Cover'}
+                    alt={book.title}
+                    className="sellerhome-book-cover"
+                  />
+                  <CardContent className="sellerhome-book-content">
+                    <Typography variant="h6" className="sellerhome-book-title">
+                      {book.title}
+                    </Typography>
+                    <Typography variant="subtitle2" className="sellerhome-book-author">
+                      {book.author}
+                    </Typography>
+                    <Typography variant="body2" className="sellerhome-book-description">
+                      {book.description}
+                    </Typography>
+                    <Typography variant="subtitle1" className="sellerhome-book-price">
+                      ${book.price}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
+
+      {/* Recent Activity Timeline */}
+      <Box className="sellerhome-activity-timeline">
+        <Typography variant="h6" className="sellerhome-activity-title-timeline">
           Recent Activity
         </Typography>
-=======
-      <Box className="sellerhome-activity-list">
-        <div className="sellerhome-activity-title">Recent Activity</div>
->>>>>>> 09b2941 (Books updated)
         {recentActivities.length === 0 ? (
-          <Typography color="text.secondary" sx={{ fontStyle: 'italic' }}>
+          <Typography color="text.secondary" className="sellerhome-activity-none">
             No recent activity.
           </Typography>
         ) : (
-          recentActivities.map((activity, idx) => (
-<<<<<<< HEAD
-            <Box
-              key={idx}
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                py: 1.5,
-                borderBottom: idx < recentActivities.length - 1 ? '1px solid #e0e7ff' : 'none',
-              }}
-            >
-              <Typography sx={{ fontWeight: 500 }}>{activity.action}</Typography>
-              <Typography variant="caption" color="text.secondary">
-                {activity.time}
-              </Typography>
-            </Box>
-          ))
-        )}
-      </Paper>
-
-=======
-            <div className="sellerhome-activity-row" key={idx}>
-              <span>
-                <span className={`sellerhome-activity-dot ${activity.type}`}></span>
-                {activity.action}
-              </span>
-              <Typography variant="caption" color="text.secondary">
-                {activity.time}
-              </Typography>
-            </div>
-          ))
+          <Timeline position="right" className="sellerhome-timeline">
+            {recentActivities.map((activity, idx) => (
+              <TimelineItem key={idx} className="sellerhome-timeline-item">
+                <TimelineSeparator>
+                  <TimelineDot
+                    className={`sellerhome-timeline-dot sellerhome-timeline-dot-${activity.type}`}
+                  />
+                  {idx < recentActivities.length - 1 && <TimelineConnector className="sellerhome-timeline-connector" />}
+                </TimelineSeparator>
+                <TimelineContent>
+                  <Typography className="sellerhome-timeline-action">{activity.action}</Typography>
+                  <Typography variant="caption" color="text.secondary" className="sellerhome-timeline-time">
+                    {activity.time}
+                  </Typography>
+                </TimelineContent>
+              </TimelineItem>
+            ))}
+          </Timeline>
         )}
       </Box>
->>>>>>> 09b2941 (Books updated)
     </Box>
   );
 }

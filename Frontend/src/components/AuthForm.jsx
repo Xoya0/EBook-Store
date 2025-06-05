@@ -62,6 +62,15 @@ function AuthForm() {
         p: { xs: 0, sm: 2 },
       }}
     >
+      {/* Back to Home Button */}
+      <Button
+        variant="outlined"
+        color="primary"
+        sx={{ position: 'absolute', top: 24, left: 24, zIndex: 10, borderRadius: 3, fontWeight: 600, background: '#fff8', boxShadow: '0 2px 8px #0001', textTransform: 'none' }}
+        onClick={() => navigate('/')}
+      >
+        ← Back to Home
+      </Button>
       <Paper elevation={8} sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, borderRadius: 6, overflow: 'hidden', minWidth: { xs: '98vw', sm: 340, md: 900 }, maxWidth: '98vw', position: 'relative', boxShadow: '0 8px 32px #0002', m: { xs: 0, sm: 2 } }}>
         {/* Tab-like top center */}
         <Box sx={{ position: 'absolute', top: -24, left: '50%', transform: 'translateX(-50%)', bgcolor: '#fff', borderRadius: '0 0 16px 16px', width: 60, height: 32, zIndex: 2, boxShadow: '0 2px 8px #0001', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
