@@ -32,21 +32,52 @@ function AuthForm() {
 
   const handleTabChange = (val) => setTab(val);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (userType === 'buyer') {
-      navigate('/buyerhome');
-    } else {
-      navigate('/sellerhome');
+    try {
+      const res = await fetch('http://localhost:8080/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: loginEmail,
+          password: loginPassword,
+          userType,
+        }),
+      });
+      const msg = await res.text();
+      if (!res.ok) throw new Error(msg);
+      if (userType === 'buyer') {
+        navigate('/buyerhome');
+      } else {
+        navigate('/sellerhome');
+      }
+    } catch (err) {
+      alert('Login failed: ' + err.message);
     }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    if (userType === 'buyer') {
-      navigate('/buyerhome');
-    } else {
-      navigate('/sellerhome');
+    try {
+      const res = await fetch('http://localhost:8080/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: registerEmail,
+          password: registerPassword,
+          name: registerName,
+          userType,
+        }),
+      });
+      const msg = await res.text();
+      if (!res.ok) throw new Error(msg);
+      if (userType === 'buyer') {
+        navigate('/buyerhome');
+      } else {
+        navigate('/sellerhome');
+      }
+    } catch (err) {
+      alert('Registration failed: ' + err.message);
     }
   };
 
